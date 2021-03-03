@@ -44,3 +44,19 @@ This will take a picture every hour between sunrise and sunset.
 This will takes a photo every hour and save it in home/pi using a folder such as: /2014/11/2014_11_1_10_15.jpg (year/month/year_month_day_hour_minutes.jpg)
 
 * Designed to be run constantly.
+
+Installation
+-----------
+Enable pi camera
+```
+sudo raspi-config
+```
+Go to interfaces and enable the camera. Set the right localization and timezone while youŕe here.
+
+```
+sudo apt-get install python3-pip
+sudo apt-get install git
+git clone https://github.com/53645714n/farmlapse
+cd farmlapse
+pip3 install requirements
+` `
