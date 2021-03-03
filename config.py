@@ -1,6 +1,6 @@
 config = {}
-config["am"] = 400
-config["pm"] = 2000
+config["latitude"] = 51.976132
+config["longitude"] = 5.670997
 
 config["flip_horizontal"] = False
 config["flip_vertical"] = False
