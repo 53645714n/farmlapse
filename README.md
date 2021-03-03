@@ -1,4 +1,4 @@
-farmtimer - create timelapses with your Raspberry Pi
+farmlapse - create timelapses with your Raspberry Pi
 ==========
 
 farmtimer gives you a smart way to capture photos for your timelapses. It is smart because it only takes pictures between sunrise and sunset and creates a useful folder structure. It is simple because it only depends on Python and `raspistill` both of which are normally already available and one extra library called `sunrise`.
