@@ -19,8 +19,8 @@ def prepare_dir(base, now):
     path = str( datetime.now().year)  + "/"  + str( datetime.now().month)+"/"+ str( datetime.now().day)
     try_to_mkdir(base + "/" +path)
 
-    path =  str( datetime.now().year)  + "/"  + str( datetime.now().month)+"/"+ str( datetime.now().day)+"/"+ str( datetime.now().hour)
-    try_to_mkdir(base + "/" +path)
+#    path =  str( datetime.now().year)  + "/"  + str( datetime.now().month)+"/"+ str( datetime.now().day)+"/"+ str( datetime.now().hour)
+#    try_to_mkdir(base + "/" +path)
     return path
 
 def make_os_command(config, exposureMode , file_name):
@@ -58,8 +58,8 @@ def run_loop(base, pause, config):
             now = datetime.now()
             path = prepare_dir(base, now)
 
-            mili = str(current_milli_time())
-            name=path.replace("/", "_") + "_" + mili + ".jpg"
+            hour = str(hoursMinute())
+            name=path.replace("/", "_") + "_" + hour + ".jpg"
             print("Capturing " + name + " in " + exposureMode + " mode")
             file_name = base + "/" + path + "/" + name
 
