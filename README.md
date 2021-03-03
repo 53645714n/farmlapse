@@ -28,10 +28,19 @@ config["quality"] = 35
 
 Usage
 -----
+Terminal
 ```
 $ python take.py 3600 &
 ```
-
+Crontab
+```
+sudo crontab -e
+```
+and add
+```
+@reboot /usr/bin/python3 /home/pi/farmlapse/take.py 3600 &
+```
+This will take a picture every hour between sunrise and sunset.
 This will takes a photo every hour and save it in home/pi using a folder such as: /2014/11/2014_11_1_10_15.jpg (year/month/year_month_day_hour_minutes.jpg)
 
 * Designed to be run constantly.
