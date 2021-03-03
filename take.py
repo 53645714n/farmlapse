@@ -1,9 +1,9 @@
 import os
 import sys
 import time
-from datetime import datetime
+from datetime import datetime, timezone
 #from camera import exposureCalc
-from suntime import sun
+from suntime import Sun
 from config import config
 
 def try_to_mkdir(path):
@@ -45,15 +45,17 @@ def run_loop(base, pause, config):
     latitude = config["latitude"]
     longitude = config["longitude"]
     sun = Sun(latitude, longitude)
-
-    current_milli_time = lambda: int(round(time.time() * 1000))
+#    start_time = sun.get_sunrise_time()
+#    end_time = sun.get_sunset_time()
+#    now = datetime.now()
+#    current_milli_time = lambda: int(round(time.time() * 1000))
 
     print("Pause : " + str(pause))
 
     while True:
 #        hoursMinutes = int(time.strftime("%H%M"))
 #        exposureMode = exposureCalc1.get_exposure(hoursMinutes)
-        take_shot = sun.get_sunrise_time() < datetime.now < sun.get_sunset_time()
+        take_shot = sun.get_sunrise_time() < datetime.now(timezone.utc) < sun.get_sunset_time()
 
         if (take_shot == True):
             now = datetime.now()
