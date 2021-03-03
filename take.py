@@ -2,7 +2,8 @@ import os
 import sys
 import time
 from datetime import datetime
-from camera import exposureCalc
+#from camera import exposureCalc
+from suntime import sun
 from config import config
 
 def try_to_mkdir(path):
@@ -41,18 +42,18 @@ def make_os_command(config, exposureMode , file_name):
     return os_command
 
 def run_loop(base, pause, config):
-    am = config["am"]
-    pm = config["pm"]
-    exposureCalc1= exposureCalc(am, pm)
+    latitude = config["latitude"]
+    longitude = config["longitude"]
+    sun = Sun(latitude, longitude)
 
     current_milli_time = lambda: int(round(time.time() * 1000))
 
     print("Pause : " + str(pause))
 
     while True:
-        hoursMinutes = int(time.strftime("%H%M"))
-        exposureMode = exposureCalc1.get_exposure(hoursMinutes)
-        take_shot = exposureCalc1.take_shot(hoursMinutes)
+#        hoursMinutes = int(time.strftime("%H%M"))
+#        exposureMode = exposureCalc1.get_exposure(hoursMinutes)
+        take_shot = sun.get_sunrise_time() < datetime.now < sun.get_sunset_time()
 
         if (take_shot == True):
             now = datetime.now()
