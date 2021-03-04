@@ -2,7 +2,6 @@ import os
 import sys
 import time
 from datetime import datetime, timezone
-from camera import exposureCalc
 from suntime import Sun
 from config import config
 
@@ -17,11 +16,6 @@ def prepare_dir(base, now):
     path = str(now.year)  + "/"  + str(now.month)
     try_to_mkdir(base + "/" +path)
 
-#    path = str( datetime.now().year)  + "/"  + str( datetime.now().month)+"/"+ str( datetime.now().day)
-#    try_to_mkdir(base + "/" +path)
-
-#    path =  str( datetime.now().year)  + "/"  + str( datetime.now().month)+"/"+ str( datetime.now().day)+"/"+ str( datetime.now().hour)
-#    try_to_mkdir(base + "/" +path)
     return path
 
 def make_os_command(config, file_name):
@@ -41,33 +35,25 @@ def make_os_command(config, file_name):
     return os_command
 
 def run_loop(base, pause, config):
-    latitude = config["latitude"]
-    longitude = config["longitude"]
-    sun = Sun(latitude, longitude)
-#    start_time = sun.get_sunrise_time()
-#    end_time = sun.get_sunset_time()
-#    now = datetime.now()
-#    current_milli_time = lambda: int(round(time.time() * 1000))
+    sun = Sun(config["latitude"],config["longitude"])
 
     print("Pause : " + str(pause))
 
     while True:
-        hoursMinutes = int(time.strftime("%H%M"))
-#        exposureMode = exposureCalc1.get_exposure(hoursMinutes)
         take_shot = sun.get_sunrise_time() < datetime.now(timezone.utc) < sun.get_sunset_time()
+###        take_shot = True ### For testing purposes at night
 
         if (take_shot == True):
             now = datetime.now()
             path = prepare_dir(base, now)
 
-#            time = str(hoursMinutes())
-            name=path.replace("/", "_") + "_" + str( datetime.now().day) + "_" + time.strftime("%H") + "_" + time.strftime("%M") +".jpg"
-#            print("Capturing " + name + " in " + exposureMode + " mode")
+            name=path.replace("/", "_") + "_" + str(datetime.now().day) + "_" + time.strftime("%H") + "_" + time.strftime("%M") +".jpg"
             print("Capturing " + name )
             file_name = base + "/" + path + "/" + name
 
             os_command = make_os_command(config, file_name)
             print(os_command)
+
             os.system(os_command)
             print("Written: " + file_name)
         else:
