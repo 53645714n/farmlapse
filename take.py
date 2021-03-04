@@ -2,7 +2,7 @@ import os
 import sys
 import time
 from datetime import datetime, timezone
-#from camera import exposureCalc
+from camera import exposureCalc
 from suntime import Sun
 from config import config
 
@@ -24,7 +24,7 @@ def prepare_dir(base, now):
 #    try_to_mkdir(base + "/" +path)
     return path
 
-def make_os_command(config, exposureMode , file_name):
+def make_os_command(config, file_name):
     height = config["height"]
     width = config["width"]
 
@@ -36,7 +36,6 @@ def make_os_command(config, exposureMode , file_name):
 
     os_command = os_command + "-h "+str(height)+\
         " -w "+str(width)+\
-        " --exposure " +exposureMode +\
         " --metering " + config["metering_mode"] +\
         " -o "+file_name
     return os_command
@@ -53,7 +52,7 @@ def run_loop(base, pause, config):
     print("Pause : " + str(pause))
 
     while True:
-#        hoursMinutes = int(time.strftime("%H%M"))
+        hoursMinutes = int(time.strftime("%H%M"))
 #        exposureMode = exposureCalc1.get_exposure(hoursMinutes)
         take_shot = sun.get_sunrise_time() < datetime.now(timezone.utc) < sun.get_sunset_time()
 
@@ -63,10 +62,12 @@ def run_loop(base, pause, config):
 
 #            time = str(hoursMinutes())
             name=path.replace("/", "_") + "_" + str( datetime.now().day) + "_" + time.strftime("%H") + "_" + time.strftime("%M") +".jpg"
-            print("Capturing " + name + " in " + exposureMode + " mode")
+#            print("Capturing " + name + " in " + exposureMode + " mode")
+            print("Capturing " + name )
             file_name = base + "/" + path + "/" + name
 
-            os_command = make_os_command(config, exposureMode, file_name)
+            os_command = make_os_command(config, file_name)
+            print(os_command)
             os.system(os_command)
             print("Written: " + file_name)
         else:
