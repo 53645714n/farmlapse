@@ -1,7 +1,7 @@
 farmlapse - create timelapses with your Raspberry Pi
 ==========
 
-farmtimer gives you a smart way to capture photos for your timelapses. It is smart because it only takes pictures between sunrise and sunset and creates a useful folder structure. It is simple because it only depends on Python and `raspistill` both of which are normally already available and one extra library called `sunrise`.
+farmlapse gives you a smart way to capture photos for your timelapses. It is smart because it only takes pictures between sunrise and sunset and creates a useful folder structure. It is simple because it only depends on Python and `raspistill` both of which are normally already available and one extra library called `sunrise`.
 
 How does it work?
 ------------------
@@ -22,7 +22,7 @@ config["metering_mode"] = "matrix"
 config["base_path"] = "/home/pi"
 config["height"] = 1536
 config["width"] = 2048
-config["quality"] = 35
+config["quality"] = 100
 ```
 
 
@@ -40,10 +40,7 @@ and add
 ```
 @reboot /usr/bin/python3 /home/pi/farmlapse/take.py 3600 &
 ```
-This will take a picture every hour between sunrise and sunset.
-This will takes a photo every hour and save it in home/pi using a folder such as: /2014/11/2014_11_1_10_15.jpg (year/month/year_month_day_hour_minutes.jpg)
-
-* Designed to be run constantly.
+This will takes a photo every hour between sunrise and sunset and save it in home/pi using a folder such as: /2014/11/2014_11_1_10_15.jpg (year/month/year_month_day_hour_minutes.jpg)
 
 Installation
 -----------
@@ -59,4 +56,10 @@ sudo apt-get install git
 git clone https://github.com/53645714n/farmlapse
 cd farmlapse
 pip3 install requirements
-` `
+```
+
+Wish list
+---------
+* Add exposurecalc based on actual sunrise-sunset times
+* Add variables to tell the script to run only at night/day/both/day with offset
+* Maybe add some logging
