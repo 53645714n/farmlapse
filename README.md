@@ -49,14 +49,17 @@ Enable pi camera
 sudo raspi-config
 ```
 Go to interfaces and enable the camera. Set the right localization and timezone while youŕe here.
-
+Make sure your pi is up to date and all necessery packages are installed because you might not be able to access the internet with it again.
 ```
-sudo apt-get install python3-pip
-sudo apt-get install git
+sudo apt update
+sudo apt upgrade
+sudo apt install python3-pip git dnsmasq hostapd npm
 git clone https://github.com/53645714n/farmlapse
 cd farmlapse
-pip3 install requirements
+pip3 install suntime
 ```
+
+
 
 Wish list
 ---------
