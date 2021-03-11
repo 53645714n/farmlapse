@@ -59,7 +59,33 @@ sudo apt install python3-pip git dnsmasq hostapd npm ffmpeg -y
 git clone https://github.com/53645714n/farmlapse
 cd farmlapse
 pip3 install suntime
+sudo reboot
 ```
+Create node.js service
+```
+cd farmlapse/node
+npm init
+```
+Answer all questions (or skip them)
+```
+npm install express
+```
+Copy the service file and enble it
+```
+cd ..
+sudo cp farmlapsehotspot.service /etc/systemd/system
+sudo systemctl enable farmalpsehotspot.service
+```
+Make a timelapse automatically every night from all picturs in the pictures folder:
+```
+crontab -e
+```
+and add
+```
+0 0 * * * sh /home/pi/farmlapse/create_farmlapse.sh
+```
+!!! Afther the following steps you probobly won't be able to use the internet with your pi !!!
+
 Set a static IP with dhcpd
 ```
 sudo nano /etc/dhcpcd.conf
