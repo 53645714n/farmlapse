@@ -9,11 +9,8 @@ def try_to_mkdir(path):
     if os.path.exists(path) == False:
         os.makedirs(path)
 
-def prepare_dir(base, now):
-    path = str(now.year)
-    try_to_mkdir(base + "/" +path)
-
-    path = str(now.year)  + "/"  + str(now.month)
+def prepare_dir(base):
+    path = "pictures"
     try_to_mkdir(base + "/" +path)
 
     return path
@@ -40,14 +37,14 @@ def run_loop(base, pause, config):
     print("Pause : " + str(pause))
 
     while True:
-        take_shot = sun.get_sunrise_time() < datetime.now(timezone.utc) < sun.get_sunset_time()
-###        take_shot = True ### For testing purposes at night
+#        take_shot = sun.get_sunrise_time() < datetime.now(timezone.utc) < sun.get_sunset_time()
+        take_shot = True ### For testing purposes at night
 
         if (take_shot == True):
             now = datetime.now()
-            path = prepare_dir(base, now)
+            path = prepare_dir(base)
 
-            name=path.replace("/", "_") + "_" + str(datetime.now().day) + "_" + time.strftime("%H") + "_" + time.strftime("%M") +".jpg"
+            name=str(datetime.now().year) + "_" + str(datetime.now().month) + "_" + str(datetime.now().day) + "_" + time.strftime("%H") + "_" + time.strftime("%M") +".jpg"
             print("Capturing " + name )
             file_name = base + "/" + path + "/" + name
 

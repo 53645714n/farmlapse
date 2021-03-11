@@ -1,0 +1,13 @@
+[Unit]
+Description=Farmlapse WiFi Hotspot Service
+After=network.target
+
+[Service]
+WorkingDirectory=/home/pi/farmlapse/node
+ExecStart=/usr/bin/nodejs /home/pi/farmlapse/node/app.js
+Restart=on-failure
+User=root
+Environment=PORT=3000
+
+[Install]
+WantedBy=multi-user.target
