@@ -44,7 +44,7 @@ def run_loop(base, pause, config):
             now = datetime.now()
             path = prepare_dir(base)
 
-            name=str(datetime.now().year) + "_" + str(datetime.now().month) + "_" + str(datetime.now().day) + "_" + time.strftime("%H") + "_" + time.strftime("%M") +".jpg"
+            name=str(datetime.now().year) + "_" + str(datetime.now().month).zfill(2) + "_" + str(datetime.now().day).zfill(2) + "_" + time.strftime("%H") + "_" + time.strftime("%M") +".jpg"
             print("Capturing " + name )
             file_name = base + "/" + path + "/" + name
 
